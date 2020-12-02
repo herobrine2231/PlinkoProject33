@@ -66,7 +66,7 @@ function draw() {
  
   Engine.update(engine);
 
-  text("Score : "+score,20,30);
+  
 
   ground.display();
  
@@ -92,12 +92,12 @@ function draw() {
      divisions[k].display();
    }
 
-   console.log(particle);
-   if(particle!=null)
+   text("Score : "+score,20,30); 
+   if(particle !== null)
   {
     particle.display();
 
-    if (particle.body.position.y >800)
+    if (particle.body.position.y <799)
     {
       if(particle.body.position.x>300)
       {
@@ -109,25 +109,31 @@ function draw() {
         {
           gameState ="end";
         }
+        console.log(gameState);
       }
     }
-  
-  if (particle.body.position.y >800)
+
+    if (particle!== null)
     {
-      if(particle.body.position.x>601 && particle.body.position < 800)
+      if (particle.body.position.y < 799)
       {
-        score=score+200;
-        console.log(score);
-        particle = null;
-       // count++;
-        if(count >= 5)
+        if(particle.body.position.x>601 && particle.body.position < 799)
         {
-          gameState ="end";
+          score=score+200;
+          console.log(score);
+          particle = null;
+         // count++;
+          if(count >= 5)
+          {
+            gameState ="end";
+          }
+          console.log(gameState);
         }
-      }
     }
-  
-  if (particle.body.position.y >800)
+  }
+  if(particle!==null)
+  {
+  if (particle.body.position.y < 799)
     {
       if(particle.body.position.x>301 && particle.body.position.x<600)
       {
@@ -139,13 +145,14 @@ function draw() {
         {
           gameState ="end";
         }
+        console.log(gameState);
       }
     }
   }
 
-   
+  text("Score : "+score,20,30); 
 }
-
+}
 function mousePressed()
 {
   if (gameState !=="end")
@@ -154,10 +161,12 @@ function mousePressed()
     console.log(count);
     particle=new Particle(mouseX, 10, 10, 10);
   }
-  else{
+  if(gameState ==="end")
+  {
     console.log(gameState);
     count=0;
     console.log(count);
-    text("GA<ME OVER", 300, 300);
+    text("GAME OVER",width/2, height/2);
+   
   }
 }
